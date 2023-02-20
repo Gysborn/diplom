@@ -3,40 +3,30 @@ version: '3.8'
 services:
   front:
     image: sermalenk/skypro-front:lesson-34
+    restart: always
     ports:
-     - "80:80"
+     - 80:80
     depends_on:
-      - api
-
+      api:
+        condition: service_started
   api:
-    build: .
+    image: gysborn/diploma:latest
+    env_file: .env
+    restart: always
+    environment:
+      DB_HOST: postgres
     depends_on:
       postgres:
         condition: service_healthy
-      migrations:
-        condition: service_completed_successfully
-    env_file: .env
-    environment:
-      DB_HOST: postgres
-
-  migrations:
-    build: .
-    depends_on:
-      postgres:
-        condition: service_healthy
-    env_file: .env
-    environment:
-      DB_HOST: postgres
-    command: python manage.py migrate
 
   postgres:
-    image: postgres:15.1-alpine
+    image: postgres:14.6
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_DB: ${DB_NAME}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME} "]
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME} " ]
       interval: 5s
       timeout: 5s
       retries: 15
