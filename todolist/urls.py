@@ -25,5 +25,5 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        path('api-auth/', include('rest_framework.urls'))
+        path('api-auth', include('rest_framework.urls'))
     ]

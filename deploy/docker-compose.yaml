@@ -5,12 +5,12 @@ services:
     image: sermalenk/skypro-front:lesson-35
     restart: always
     ports:
-     - 80:80
+     - "80:80"
     depends_on:
       api:
         condition: service_started
   api:
-    image: gysborn/diploma:latest
+    image: gysborn/diploma:homework-35
     env_file: .env
     restart: always
     environment:
@@ -19,8 +19,18 @@ services:
       postgres:
         condition: service_healthy
 
+  migrations:
+    image: gysborn/diploma:homework-35
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      DB_HOST: postgres
+    command: python manage.py migrate
+
   postgres:
-    image: postgres:14.6
+    image: postgres:15.1-alpine
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USER}
