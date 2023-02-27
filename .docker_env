@@ -1,0 +1,9 @@
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=postgres
+DB_USER=postgres
+DB_PASSWORD=diplom
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DEBUG=True
+DATABASE_URL=psql://:@:/
+SECRET_KEY=django-insecure-_gf7^f(0s7e4axke*yzrddng$k6k!l$e72u3&k90eecg3+l*w

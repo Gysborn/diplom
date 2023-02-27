@@ -3,24 +3,24 @@ version: '3.8'
 services:
   front:
     image: sermalenk/skypro-front:lesson-35
+    restart: always
     ports:
      - "80:80"
     depends_on:
-      - api
-
+      api:
+        condition: service_started
   api:
-    build: .
+    image: gysborn/diploma:homework-35
+    env_file: .env
+    restart: always
+    environment:
+      DB_HOST: postgres
     depends_on:
       postgres:
         condition: service_healthy
-      migrations:
-        condition: service_completed_successfully
-    env_file: .env
-    environment:
-      DB_HOST: postgres
 
   migrations:
-    build: .
+    image: gysborn/diploma:homework-35
     depends_on:
       postgres:
         condition: service_healthy
@@ -36,7 +36,7 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_DB: ${DB_NAME}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME} "]
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME} " ]
       interval: 5s
       timeout: 5s
       retries: 15
