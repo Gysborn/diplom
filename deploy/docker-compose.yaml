@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   front:
-    image: sermalenk/skypro-front:lesson-35
+    image: sermalenk/skypro-front:lesson-36
     restart: always
     ports:
      - "80:80"
@@ -10,7 +10,7 @@ services:
       api:
         condition: service_started
   api:
-    image: gysborn/diploma:homework-35
+    image: gysborn/diploma:homework-36
     env_file: .env
     restart: always
     environment:
@@ -20,7 +20,7 @@ services:
         condition: service_healthy
 
   migrations:
-    image: gysborn/diploma:homework-35
+    image: gysborn/diploma:homework-36
     depends_on:
       postgres:
         condition: service_healthy
