@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'social_django',
     'core',
     'goals',
-
+    'drf_spectacular',
 ]
 if DEBUG:
     INSTALLED_APPS += [
@@ -159,5 +159,11 @@ SOCIAL_AUTH_USER_MODEL = 'core.User'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Diplom API',
+
 }

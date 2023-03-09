@@ -13,4 +13,8 @@ urlpatterns = [
     path('goal_comment/create', views.GoalCommentCreateView.as_view(), name='create-comment'),
     path('goal_comment/list', views.GoalCommentListView.as_view(), name='list-comment'),
     path('goal_comment/<pk>', views.GoalCommentView.as_view(), name='comment'),
+    path("board/create", views.BoardCreateView.as_view(), name='board-create'),
+    path("board/list", views.BoardListView.as_view(), name='board-list'),
+    path("board/<int:pk>", views.BoardView.as_view(), name='board'),
+
 ]
