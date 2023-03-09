@@ -10,7 +10,7 @@ services:
       api:
         condition: service_started
   api:
-    image: gysborn/diploma:homework-36
+    image: gysborn/diploma:homework-37
     env_file: .env
     restart: always
     environment:
@@ -20,7 +20,7 @@ services:
         condition: service_healthy
 
   migrations:
-    image: gysborn/diploma:homework-36
+    image: gysborn/diploma:homework-37
     depends_on:
       postgres:
         condition: service_healthy
